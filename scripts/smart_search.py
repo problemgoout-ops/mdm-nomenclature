@@ -9,7 +9,7 @@ from difflib import SequenceMatcher
 from collections import defaultdict
 import os
 
-DATA_PATH = '/home/clawd/.openclaw/skills/mdm-nomenclature/data/mdm_nomenclature.jsonl'
+DATA_PATH = '/home/clawd/.openclaw/agents/nomenclature/skills/mdm-nomenclature/data/mdm_nomenclature.jsonl'
 
 # Глобальные индексы
 _article_index = {}  # артикул -> код МДМ
