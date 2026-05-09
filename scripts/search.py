@@ -18,8 +18,14 @@ DB_NAME = os.getenv('DB_NAME', 'nomenclature_kb')
 DB_USER = os.getenv('DB_USER', 'postgres')
 DB_PASS = os.getenv('DB_PASS', '')
 
-# OpenAI API
-OPENAI_API_KEY = os.getenv('OPENAI_API_KEY', 'YOUR_API_KEY_HERE')
+# OpenAI API — try env var first, then .env file
+_openai_key = os.getenv('OPENAI_API_KEY', '')
+if not _openai_key:
+    env_file = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '.env')
+    if os.path.exists(env_file):
+        with open(env_file, 'r') as f:
+            _openai_key = f.read().strip()
+OPENAI_API_KEY = _openai_key or 'YOUR_API_KEY_HERE'
 client = openai.OpenAI(api_key=OPENAI_API_KEY)
 
 DATA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'data', 'mdm_nomenclature.jsonl')
